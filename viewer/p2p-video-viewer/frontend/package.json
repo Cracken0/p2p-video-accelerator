@@ -1,0 +1,40 @@
+{
+  "name": "p2p-video-viewer-frontend",
+  "version": "1.0.0",
+  "description": "P2P视频加速器前端",
+  "main": "index.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5",
+    "vuex": "^4.1.0",
+    "axios": "^1.6.0",
+    "core-js": "^3.33.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.8",
+    "@vue/cli-plugin-eslint": "~5.0.8",
+    "@vue/cli-plugin-router": "~5.0.8",
+    "@vue/cli-plugin-vuex": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
+    "@vue/compiler-sfc": "^3.3.4",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.55.0",
+    "eslint-plugin-vue": "^9.19.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
+
+
+
+
+
