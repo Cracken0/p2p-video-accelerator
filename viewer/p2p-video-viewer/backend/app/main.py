@@ -5,6 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.config import settings
 from app.api import videos, search, peers, history, settings as settings_api
+from fastapi import FastAPI
+from app.data.mock_data import init_mock_data
 
 # 为了能在不安装包的情况下导入本仓库的 repeater/python
 _ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../..'))
@@ -18,6 +20,11 @@ app = FastAPI(
     version=settings.version,
     debug=settings.debug
 )
+
+# 启动时初始化模拟数据
+@app.on_event("startup")
+def _startup_init():
+    init_mock_data()
 
 # 配置CORS
 app.add_middleware(
