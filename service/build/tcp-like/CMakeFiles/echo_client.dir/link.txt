@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/echo_client.dir/examples/echo_client.cpp.o -o echo_client  libtcp_like_udp.a 

@@ -1,3 +1,3 @@
-# Ignore Node modules everywhere
+dist/
 node_modules/
 **/node_modules/**

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libp2p.a CMakeFiles/p2p.dir/src/peer.cpp.o CMakeFiles/p2p.dir/src/router.cpp.o CMakeFiles/p2p.dir/src/dht.cpp.o CMakeFiles/p2p.dir/src/data_api.cpp.o
+/usr/bin/ranlib libp2p.a

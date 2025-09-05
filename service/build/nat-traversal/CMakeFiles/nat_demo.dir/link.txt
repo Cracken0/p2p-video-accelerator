@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/nat_demo.dir/examples/nat_demo.cpp.o -o nat_demo  libnat_traversal.a ../tcp-like/libtcp_like_udp.a 

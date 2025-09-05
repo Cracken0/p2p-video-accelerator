@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnat_traversal.a CMakeFiles/nat_traversal.dir/src/nat_detector.cpp.o CMakeFiles/nat_traversal.dir/src/nat_agent.cpp.o
+/usr/bin/ranlib libnat_traversal.a

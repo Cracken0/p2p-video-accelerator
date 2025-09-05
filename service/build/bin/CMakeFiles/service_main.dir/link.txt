@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/service_main.dir/main.cpp.o -o service_main  ../p2p/libp2p.a ../repeater_cpp/librepeater.a ../nat-traversal/libnat_traversal.a ../tcp-like/libtcp_like_udp.a ../store/libstore.a /usr/lib/x86_64-linux-gnu/libcrypto.so 

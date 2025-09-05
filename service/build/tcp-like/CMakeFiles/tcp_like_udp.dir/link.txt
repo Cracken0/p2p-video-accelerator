@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtcp_like_udp.a CMakeFiles/tcp_like_udp.dir/src/udp_socket.cpp.o CMakeFiles/tcp_like_udp.dir/src/reliable_session.cpp.o
+/usr/bin/ranlib libtcp_like_udp.a
