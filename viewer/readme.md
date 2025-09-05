@@ -87,3 +87,61 @@ bool：开启p2p服务
 ## 项目录结构要求
 
 前后端结构清晰，模块划分清晰。
+
+## 运行方法
+
+以下步骤基于本项目内置的模拟数据与接口，可直接启动联调。
+
+### 后端（FastAPI）
+1. 安装依赖（如缺少 `venv`，请先安装：`sudo apt install -y python3-venv`）
+```bash
+cd viewer/p2p-video-viewer/backend
+[ -d venv ] || python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+2. 启动服务（单进程，避免端口冲突）：
+```bash
+# 如端口被占用可先清理
+fuser -k 8000/tcp 2>/dev/null || true
+pkill -f "uvicorn app.main:app" 2>/dev/null || true
+
+# 启动
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+3. 健康检查：
+```bash
+curl -sS http://127.0.0.1:8000/health
+```
+- API 文档：`http://127.0.0.1:8000/docs`
+- 主要接口：`/api/search`、`/api/videos/{rid}`、`/api/peers`、`/api/history`、`/api/settings`
+
+### 前端（Vue 3）
+1. 安装 Node.js（建议 Node 18）：
+```bash
+# 推荐使用 NodeSource（如需 sudo）
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+2. 安装并启动前端：
+```bash
+cd viewer/p2p-video-viewer/frontend
+npm install
+npx vue-cli-service serve --port 8080
+```
+3. 访问前端：
+- 前端开发服：`http://localhost:8080`
+- 已配置代理：`/api` → `http://127.0.0.1:8000`
+
+### 常见问题
+- ESLint 报 “No ESLint configuration found”：已在前端添加 `.eslintrc.js` 与 `.eslintignore`，并设置 `lintOnSave: false`，若仍有冲突可执行：
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+- 8000 端口占用：
+```bash
+fuser -k 8000/tcp 2>/dev/null || true
+pkill -f "uvicorn app.main:app" 2>/dev/null || true
+```
+- 播放页示例视频：为便于联调，后端返回可公开访问的示例视频流地址。
