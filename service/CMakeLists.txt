@@ -10,4 +10,10 @@ add_subdirectory(nat-traversal)
 add_subdirectory(store)
 add_subdirectory(p2p)
 
+# 引入 repeater C++ 库
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../repeater/cpp ${CMAKE_CURRENT_BINARY_DIR}/repeater_cpp)
+
+# 可执行入口
+add_subdirectory(bin)
+
 

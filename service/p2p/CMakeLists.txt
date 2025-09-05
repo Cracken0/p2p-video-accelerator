@@ -22,7 +22,7 @@ target_include_directories(p2p
 
 target_link_libraries(p2p
     PUBLIC
-        tcp_like
+        tcp_like_udp
         nat_traversal
         store
         OpenSSL::Crypto

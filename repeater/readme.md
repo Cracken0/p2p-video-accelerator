@@ -39,3 +39,24 @@ data 字节流 len 发送方定义 字段的值。只可能是bool 整数 浮点
 
 代码层次结构清晰，功能模块划分清晰，内外部接口清晰。
 可以适当调整其他目录中的代码来适配整体结构。
+
+---
+
+## 实现说明
+
+本次实现提供：
+- C++ 端 `repeater` 库：`Unix Domain Socket` 服务器，遵循 getter/setter 报文协议。
+- Python 端 `repeater` 客户端：提供 `get(field)` 与 `set(field, value)` API。
+- 在 `service/bin` 增加可执行入口，集成 `store` 与 `p2p` 的简化示例字段。
+
+默认 Unix 套接字路径：`/tmp/p2p_repeater.sock`。
+
+### 报文格式
+- `func_type` (u8): 1=getter, 2=setter
+- `field` (string, 32B): UTF-8，超过将被拒绝
+- `len` (u32 BE): data 长度
+- `data`: 原始字节流
+
+### Python 客户端用法
+见 `repeater/python/repeater/client.py`。
+
