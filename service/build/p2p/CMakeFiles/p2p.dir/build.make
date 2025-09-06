@@ -125,12 +125,42 @@ p2p/CMakeFiles/p2p.dir/src/data_api.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p2p.dir/src/data_api.cpp.s"
 	cd /home/cracken/project/p2p-video-accelerator/service/build/p2p && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cracken/project/p2p-video-accelerator/service/p2p/src/data_api.cpp -o CMakeFiles/p2p.dir/src/data_api.cpp.s
 
+p2p/CMakeFiles/p2p.dir/src/protocol.cpp.o: p2p/CMakeFiles/p2p.dir/flags.make
+p2p/CMakeFiles/p2p.dir/src/protocol.cpp.o: ../p2p/src/protocol.cpp
+p2p/CMakeFiles/p2p.dir/src/protocol.cpp.o: p2p/CMakeFiles/p2p.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cracken/project/p2p-video-accelerator/service/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object p2p/CMakeFiles/p2p.dir/src/protocol.cpp.o"
+	cd /home/cracken/project/p2p-video-accelerator/service/build/p2p && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT p2p/CMakeFiles/p2p.dir/src/protocol.cpp.o -MF CMakeFiles/p2p.dir/src/protocol.cpp.o.d -o CMakeFiles/p2p.dir/src/protocol.cpp.o -c /home/cracken/project/p2p-video-accelerator/service/p2p/src/protocol.cpp
+
+p2p/CMakeFiles/p2p.dir/src/protocol.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p2p.dir/src/protocol.cpp.i"
+	cd /home/cracken/project/p2p-video-accelerator/service/build/p2p && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cracken/project/p2p-video-accelerator/service/p2p/src/protocol.cpp > CMakeFiles/p2p.dir/src/protocol.cpp.i
+
+p2p/CMakeFiles/p2p.dir/src/protocol.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p2p.dir/src/protocol.cpp.s"
+	cd /home/cracken/project/p2p-video-accelerator/service/build/p2p && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cracken/project/p2p-video-accelerator/service/p2p/src/protocol.cpp -o CMakeFiles/p2p.dir/src/protocol.cpp.s
+
+p2p/CMakeFiles/p2p.dir/src/node.cpp.o: p2p/CMakeFiles/p2p.dir/flags.make
+p2p/CMakeFiles/p2p.dir/src/node.cpp.o: ../p2p/src/node.cpp
+p2p/CMakeFiles/p2p.dir/src/node.cpp.o: p2p/CMakeFiles/p2p.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cracken/project/p2p-video-accelerator/service/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object p2p/CMakeFiles/p2p.dir/src/node.cpp.o"
+	cd /home/cracken/project/p2p-video-accelerator/service/build/p2p && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT p2p/CMakeFiles/p2p.dir/src/node.cpp.o -MF CMakeFiles/p2p.dir/src/node.cpp.o.d -o CMakeFiles/p2p.dir/src/node.cpp.o -c /home/cracken/project/p2p-video-accelerator/service/p2p/src/node.cpp
+
+p2p/CMakeFiles/p2p.dir/src/node.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p2p.dir/src/node.cpp.i"
+	cd /home/cracken/project/p2p-video-accelerator/service/build/p2p && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cracken/project/p2p-video-accelerator/service/p2p/src/node.cpp > CMakeFiles/p2p.dir/src/node.cpp.i
+
+p2p/CMakeFiles/p2p.dir/src/node.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p2p.dir/src/node.cpp.s"
+	cd /home/cracken/project/p2p-video-accelerator/service/build/p2p && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cracken/project/p2p-video-accelerator/service/p2p/src/node.cpp -o CMakeFiles/p2p.dir/src/node.cpp.s
+
 # Object files for target p2p
 p2p_OBJECTS = \
 "CMakeFiles/p2p.dir/src/peer.cpp.o" \
 "CMakeFiles/p2p.dir/src/router.cpp.o" \
 "CMakeFiles/p2p.dir/src/dht.cpp.o" \
-"CMakeFiles/p2p.dir/src/data_api.cpp.o"
+"CMakeFiles/p2p.dir/src/data_api.cpp.o" \
+"CMakeFiles/p2p.dir/src/protocol.cpp.o" \
+"CMakeFiles/p2p.dir/src/node.cpp.o"
 
 # External object files for target p2p
 p2p_EXTERNAL_OBJECTS =
@@ -139,9 +169,11 @@ p2p/libp2p.a: p2p/CMakeFiles/p2p.dir/src/peer.cpp.o
 p2p/libp2p.a: p2p/CMakeFiles/p2p.dir/src/router.cpp.o
 p2p/libp2p.a: p2p/CMakeFiles/p2p.dir/src/dht.cpp.o
 p2p/libp2p.a: p2p/CMakeFiles/p2p.dir/src/data_api.cpp.o
+p2p/libp2p.a: p2p/CMakeFiles/p2p.dir/src/protocol.cpp.o
+p2p/libp2p.a: p2p/CMakeFiles/p2p.dir/src/node.cpp.o
 p2p/libp2p.a: p2p/CMakeFiles/p2p.dir/build.make
 p2p/libp2p.a: p2p/CMakeFiles/p2p.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cracken/project/p2p-video-accelerator/service/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libp2p.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cracken/project/p2p-video-accelerator/service/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX static library libp2p.a"
 	cd /home/cracken/project/p2p-video-accelerator/service/build/p2p && $(CMAKE_COMMAND) -P CMakeFiles/p2p.dir/cmake_clean_target.cmake
 	cd /home/cracken/project/p2p-video-accelerator/service/build/p2p && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/p2p.dir/link.txt --verbose=$(VERBOSE)
 

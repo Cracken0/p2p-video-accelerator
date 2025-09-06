@@ -13,6 +13,8 @@ add_library(p2p
     src/router.cpp
     src/dht.cpp
     src/data_api.cpp
+    src/protocol.cpp
+    src/node.cpp
 )
 
 target_include_directories(p2p

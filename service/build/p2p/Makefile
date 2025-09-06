@@ -178,6 +178,30 @@ src/dht.cpp.s:
 	cd /home/cracken/project/p2p-video-accelerator/service/build && $(MAKE) $(MAKESILENT) -f p2p/CMakeFiles/p2p.dir/build.make p2p/CMakeFiles/p2p.dir/src/dht.cpp.s
 .PHONY : src/dht.cpp.s
 
+src/node.o: src/node.cpp.o
+.PHONY : src/node.o
+
+# target to build an object file
+src/node.cpp.o:
+	cd /home/cracken/project/p2p-video-accelerator/service/build && $(MAKE) $(MAKESILENT) -f p2p/CMakeFiles/p2p.dir/build.make p2p/CMakeFiles/p2p.dir/src/node.cpp.o
+.PHONY : src/node.cpp.o
+
+src/node.i: src/node.cpp.i
+.PHONY : src/node.i
+
+# target to preprocess a source file
+src/node.cpp.i:
+	cd /home/cracken/project/p2p-video-accelerator/service/build && $(MAKE) $(MAKESILENT) -f p2p/CMakeFiles/p2p.dir/build.make p2p/CMakeFiles/p2p.dir/src/node.cpp.i
+.PHONY : src/node.cpp.i
+
+src/node.s: src/node.cpp.s
+.PHONY : src/node.s
+
+# target to generate assembly for a file
+src/node.cpp.s:
+	cd /home/cracken/project/p2p-video-accelerator/service/build && $(MAKE) $(MAKESILENT) -f p2p/CMakeFiles/p2p.dir/build.make p2p/CMakeFiles/p2p.dir/src/node.cpp.s
+.PHONY : src/node.cpp.s
+
 src/peer.o: src/peer.cpp.o
 .PHONY : src/peer.o
 
@@ -201,6 +225,30 @@ src/peer.s: src/peer.cpp.s
 src/peer.cpp.s:
 	cd /home/cracken/project/p2p-video-accelerator/service/build && $(MAKE) $(MAKESILENT) -f p2p/CMakeFiles/p2p.dir/build.make p2p/CMakeFiles/p2p.dir/src/peer.cpp.s
 .PHONY : src/peer.cpp.s
+
+src/protocol.o: src/protocol.cpp.o
+.PHONY : src/protocol.o
+
+# target to build an object file
+src/protocol.cpp.o:
+	cd /home/cracken/project/p2p-video-accelerator/service/build && $(MAKE) $(MAKESILENT) -f p2p/CMakeFiles/p2p.dir/build.make p2p/CMakeFiles/p2p.dir/src/protocol.cpp.o
+.PHONY : src/protocol.cpp.o
+
+src/protocol.i: src/protocol.cpp.i
+.PHONY : src/protocol.i
+
+# target to preprocess a source file
+src/protocol.cpp.i:
+	cd /home/cracken/project/p2p-video-accelerator/service/build && $(MAKE) $(MAKESILENT) -f p2p/CMakeFiles/p2p.dir/build.make p2p/CMakeFiles/p2p.dir/src/protocol.cpp.i
+.PHONY : src/protocol.cpp.i
+
+src/protocol.s: src/protocol.cpp.s
+.PHONY : src/protocol.s
+
+# target to generate assembly for a file
+src/protocol.cpp.s:
+	cd /home/cracken/project/p2p-video-accelerator/service/build && $(MAKE) $(MAKESILENT) -f p2p/CMakeFiles/p2p.dir/build.make p2p/CMakeFiles/p2p.dir/src/protocol.cpp.s
+.PHONY : src/protocol.cpp.s
 
 src/router.o: src/router.cpp.o
 .PHONY : src/router.o
@@ -241,9 +289,15 @@ help:
 	@echo "... src/dht.o"
 	@echo "... src/dht.i"
 	@echo "... src/dht.s"
+	@echo "... src/node.o"
+	@echo "... src/node.i"
+	@echo "... src/node.s"
 	@echo "... src/peer.o"
 	@echo "... src/peer.i"
 	@echo "... src/peer.s"
+	@echo "... src/protocol.o"
+	@echo "... src/protocol.i"
+	@echo "... src/protocol.s"
 	@echo "... src/router.o"
 	@echo "... src/router.i"
 	@echo "... src/router.s"
