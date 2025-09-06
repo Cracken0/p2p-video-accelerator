@@ -1,255 +1,68 @@
 nohup: ignoring input
-INFO:     Started server process [3250965]
+INFO:     Started server process [3292918]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     127.0.0.1:42206 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/settings HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:35108 - "GET /api/settings/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:35108 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:35108 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:35108 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:35108 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:35108 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:35108 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40624 - "GET /api/search?query=%E5%95%8A HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40624 - "GET /api/search/?query=%E5%95%8A HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40634 - "GET /api/search?query=1 HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40634 - "GET /api/search/?query=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40634 - "GET /api/history HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40634 - "GET /api/history/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40634 - "GET /api/search?query=P HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40634 - "GET /api/search/?query=P HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "OPTIONS /api/peers/peer_001/toggle HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40514 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "PUT /api/peers/peer_001/toggle HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "OPTIONS /api/peers/peer_002/toggle HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "PUT /api/peers/peer_002/toggle HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "OPTIONS /api/peers/peer_003/toggle HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "PUT /api/peers/peer_003/toggle HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "OPTIONS /api/peers/peer_004/toggle HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "PUT /api/peers/peer_004/toggle HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:40508 - "GET /api/history HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:40508 - "GET /api/history/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56096 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:56096 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56096 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56096 - "GET /api/peers HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:56096 - "GET /api/peers/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56096 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56096 - "GET /api/settings HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:56096 - "GET /api/settings/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/search?query=p HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:56110 - "GET /api/search/?query=p HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/videos/video_001 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/videos/video_001/stream HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/search?query=p HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:56110 - "GET /api/search/?query=p HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/history HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:56110 - "GET /api/history/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/videos/video_001 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/videos/video_001/stream HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/history HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:56110 - "GET /api/history/ HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/videos/video_003 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/videos/video_003/stream HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56110 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34646 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/history HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:47552 - "GET /api/history/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/videos/video_001 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/videos/video_001/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/history HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:47552 - "GET /api/history/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/videos/video_003 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/videos/video_003/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/history HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:47552 - "GET /api/history/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/videos/video_003 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/videos/video_003/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/peers/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47552 - "GET /api/history HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:47552 - "GET /api/history/ HTTP/1.1" 200 OK

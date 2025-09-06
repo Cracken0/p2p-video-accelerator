@@ -58,3 +58,40 @@ rm -rf node_modules package-lock.json && npm install
 ```
 3) Repeater 未启动：确认 /tmp/p2p_repeater.sock 是否存在，或重新启动 service_main。
 
+六、停止与重启
+1) 停止所有服务（fish/bash 通用）：
+```bash
+# 停止前端（开发服务器）
+pkill -f "vue-cli-service serve" 2>/dev/null || true
+
+# 停止后端（Uvicorn）
+pkill -f "uvicorn app.main:app" 2>/dev/null || true
+fuser -k 8000/tcp 2>/dev/null || true
+
+# 停止 Repeater（C++）
+if [ -f /tmp/repeater.pid ]; then kill $(cat /tmp/repeater.pid) 2>/dev/null || true; rm -f /tmp/repeater.pid; fi
+pkill -f "/home/cracken/project/p2p-video-accelerator/service/build/bin/service_main" 2>/dev/null || true
+rm -f /tmp/p2p_repeater.sock 2>/dev/null || true
+```
+2) 重启顺序（建议）：Repeater → 后端 → 前端
+```bash
+# Repeater
+/home/cracken/project/p2p-video-accelerator/service/build/bin/service_main >/tmp/repeater.log 2>&1 & echo $! > /tmp/repeater.pid
+ls -l /tmp/p2p_repeater.sock
+
+# 后端
+cd /home/cracken/project/p2p-video-accelerator/viewer/p2p-video-viewer/backend
+source venv/bin/activate
+nohup python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 > uvicorn.log 2>&1 &
+
+# 前端
+cd /home/cracken/project/p2p-video-accelerator/viewer/p2p-video-viewer/frontend
+nohup npx vue-cli-service serve --port 8080 > frontend.log 2>&1 &
+```
+3) 重启后快速健康检查：
+```bash
+curl -sS http://127.0.0.1:8000/health
+curl -sS http://127.0.0.1:8080 | head -n 5
+ls -l /tmp/p2p_repeater.sock
+```
+
