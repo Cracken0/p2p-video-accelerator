@@ -213,3 +213,122 @@ graph TD
 
 该子系统与调度层共享关键链路统计（如下行吞吐、上行速率、RTT 与丢包），并通过中转器对后端暴露可观测指标。在检测到拥塞与抖动上升时，上层调度能够主动降低并发或切换路径，从而以协同方式维持端到端的服务质量。整体而言，基于 UDP 的可靠通信在保障低延迟的同时提供了对丢包与拥塞的鲁棒性，使系统在复杂网络环境中获得可预期的性能边界。
 
+---
+
+
+
+
+
+```mermaid
+%% ------------ 网络模块架构图（重新整理版） ------------
+graph TD
+    %% ---------- P2P 路由层 ----------
+    subgraph P2P_Router["p2p::RouterTable 管理层"]
+        RT([RouterTable])
+        RT -.->|持有| SP[SuperPeer]
+        RT -.->|在线表| PeerO[Peer]
+        RT -.->|离线表| PeerInfoO[PeerInfo]
+    end
+```
+
+
+
+---
+
+```mermaid
+%% ------------ 网络模块架构图（重新整理版） ------------
+graph TD
+
+    %% ---------- 可靠会话层 ----------
+    subgraph REL["tcp_like::ReliableSession 层"]
+        RS([ReliableSession])
+        RS -.->|持有| US[UdpSocket]
+        RS -.->|远端地址| EP[Endpoint]
+    end
+
+    %% ---------- UDP 套接字层 ----------
+    subgraph UDP["tcp_like::UdpSocket 层"]
+        US -.->|封装| FD[(fd_: int)]
+        US -.->|收发地址| EP
+    end
+
+    %% ---------- 图例 ----------
+    classDef core fill:#FFE4B5,stroke:#FF8C00;
+    classDef sock  fill:#E0FFFF,stroke:#4682B4;
+    classDef data  fill:#F0FFF0,stroke:#32CD32;
+
+    class RT,RS core
+    class US,EP sock
+    class SP,PeerO,PeerInfoO data
+```
+
+
+4，系统实现
+
+> 用户界面与服务
+>
+> > 搜索与查看
+> >
+> > > 相关的url、后端对数据的处理
+> >
+> > 节点管理
+> >
+> > 历史记录
+> >
+> > 设置功能
+>
+> 进程间数据中转传输
+>
+> > 进程间通信介绍（ipc）
+> >
+> > 自定义通信协议
+> >
+> > 服务端（cpp）
+> >
+> > 客户端（python）
+>
+> 点对点通信模块
+>
+> > 节点网络的建立
+> >
+> > > superpeer
+> > >
+> > > 路由表机制
+> > >
+> > > 申请/接收连接
+> > >
+> > > 申请/接受协助连接
+> > >
+> > > 周期重连机制
+> >
+> > 节点间传输协议
+> >
+> > 资源查找
+> >
+> > > DHT或者泛洪
+>
+> 资源文件管理模块
+>
+> > 资源的保存
+> >
+> > 资源的读取
+> >
+> > 缓存淘汰机制
+>
+> NAT穿透模块
+>
+> > NAT类别判定
+> >
+> > 穿透会话管理
+>
+> 基于UDP的可靠通信
+>
+> > 三次握手
+> >
+> > 数据包重排
+> >
+> > 心跳保活
+> >
+> > 超时控制
+> >
+> > 流量统计
