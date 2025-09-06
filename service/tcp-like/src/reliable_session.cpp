@@ -79,7 +79,7 @@ void ReliableSession::update() {
     Endpoint from{};
     int n = 0;
     while ((n = socket_.recvFrom(buffer, sizeof(buffer), from)) > 0) {
-        handleIncoming(buffer, static_cast<size_t>(n));
+        handleIncoming(buffer, static_cast<size_t>(n), from);
     }
 
     uint32_t ack = lastReceivedSequence_;
@@ -112,10 +112,17 @@ void ReliableSession::update() {
     updateRates();
 }
 
-void ReliableSession::handleIncoming(const uint8_t* data, size_t len) {
+void ReliableSession::handleIncoming(const uint8_t* data, size_t len, const Endpoint& from) {
     if (len < sizeof(PacketHeader)) return;
     PacketHeader hdr{};
     std::memcpy(&hdr, data, sizeof(hdr));
+
+    // 仅处理来自期望对端的数据包（地址与端口匹配）
+    if (!remote_.address.empty()) {
+        if (from.address != remote_.address || from.port != remote_.port) {
+            return;
+        }
+    }
 
     // Handshake processing
     processHandshake(hdr.flags);
@@ -133,7 +140,7 @@ void ReliableSession::handleIncoming(const uint8_t* data, size_t len) {
         sendQueue_.end()
     );
 
-    // Receive payload
+    // Receive payload + 基于数据到达立即发送 ACK-only（无应用数据也回 ACK）
     const uint8_t* payload = data + sizeof(PacketHeader);
     size_t payloadLen = len - sizeof(PacketHeader);
 
@@ -147,6 +154,9 @@ void ReliableSession::handleIncoming(const uint8_t* data, size_t len) {
         stats_.bytesRecvTotal += payloadLen;
         bytesRecvWindow_ += payloadLen;
     }
+
+    // 纯 ACK 响应，确保对端快速得知接收进度
+    sendPacket({}, nextSequence_++, lastReceivedSequence_, recvMask_, FLAG_ACK);
 
     lastActivityAt_ = std::chrono::steady_clock::now();
 }
@@ -181,7 +191,7 @@ void ReliableSession::processHandshake(uint32_t flags) {
 
 void ReliableSession::deliverInOrder(uint32_t seq, const uint8_t* payload, size_t len) {
     // Update ack window
-    if (seq > lastReceivedSequence_) {
+    if (isSeqGreater(seq, lastReceivedSequence_)) {
         uint32_t shift = seq - lastReceivedSequence_;
         if (shift >= 32) recvMask_ = 0; else recvMask_ <<= shift;
         lastReceivedSequence_ = seq;

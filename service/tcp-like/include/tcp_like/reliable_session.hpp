@@ -97,12 +97,20 @@ private:
     std::unordered_map<uint32_t, std::vector<uint8_t>> reorderBuffer_;
     uint32_t expectedSequence_{1};
 
-    void handleIncoming(const uint8_t* data, size_t len);
+    void handleIncoming(const uint8_t* data, size_t len, const Endpoint& from);
     void sendPacket(const std::vector<uint8_t>& payload, uint32_t sequence, uint32_t ack, uint32_t ackBits, uint32_t flags);
     void processHandshake(uint32_t flags);
     void deliverInOrder(uint32_t seq, const uint8_t* payload, size_t len);
     void updateRates();
     void maybeSendHeartbeat(uint32_t ack, uint32_t ackBits);
+
+    // helpers
+    static bool isSeqGreater(uint32_t a, uint32_t b) {
+        return static_cast<int32_t>(a - b) > 0;
+    }
+    static bool isSeqGreaterOrEqual(uint32_t a, uint32_t b) {
+        return static_cast<int32_t>(a - b) >= 0;
+    }
 };
 
 } // namespace tcp_like
