@@ -215,10 +215,6 @@ graph TD
 
 ---
 
-
-
-
-
 ```mermaid
 %% ------------ 网络模块架构图（重新整理版） ------------
 graph TD
@@ -263,72 +259,219 @@ graph TD
 ```
 
 
-4，系统实现
+---
 
-> 用户界面与服务
->
-> > 搜索与查看
-> >
-> > > 相关的url、后端对数据的处理
-> >
-> > 节点管理
-> >
-> > 历史记录
-> >
-> > 设置功能
->
-> 进程间数据中转传输
->
-> > 进程间通信介绍（ipc）
-> >
-> > 自定义通信协议
-> >
-> > 服务端（cpp）
-> >
-> > 客户端（python）
->
-> 点对点通信模块
->
-> > 节点网络的建立
-> >
-> > > superpeer
-> > >
-> > > 路由表机制
-> > >
-> > > 申请/接收连接
-> > >
-> > > 申请/接受协助连接
-> > >
-> > > 周期重连机制
-> >
-> > 节点间传输协议
-> >
-> > 资源查找
-> >
-> > > DHT或者泛洪
->
-> 资源文件管理模块
->
-> > 资源的保存
-> >
-> > 资源的读取
-> >
-> > 缓存淘汰机制
->
-> NAT穿透模块
->
-> > NAT类别判定
-> >
-> > 穿透会话管理
->
-> 基于UDP的可靠通信
->
-> > 三次握手
-> >
-> > 数据包重排
-> >
-> > 心跳保活
-> >
-> > 超时控制
-> >
-> > 流量统计
+4. 系统实现
+
+4.1 用户界面与服务
+
+4.1.1 搜索与查看
+
+本系统的检索与观看路径围绕 `viewer/p2p-video-viewer` 前端与 `backend/app` 后端协作实现。前端通过 `src/services/searchApi.js` 与 `videoApi.js` 调用后端 `GET /api/search` 与 `GET /api/videos/{rid}`、`GET /api/videos/{rid}/stream` 接口，其中搜索接口由 `app/api/search.py` 代理至 `VideoService.search_videos()`，对模拟数据集中 `title/description` 字段执行小写包含式匹配，返回结构化的 `VideoSearchResult` 列表；视频详情与流信息分别由 `app/api/videos.py` 的 `get_video` 与 `get_video_stream` 提供，其中流信息在当前实现阶段返回公开可播示例 URL（`VideoService` 中的 `sample_url`），该设计确保了在 P2P 内核未集成前即可完成“端到端联调—页面验证—播放控件测试”的工程闭环。数据模型层由 `app/data/video_data.py` 提供，包含 `rid、title、description、thumbnail_url、duration、file_size` 等字段，后端以 Pydantic 模型进行出入参约束，强化接口一致性；前端则以路由驱动的页面切换组织“首页检索—结果列表—播放页”的用户流。为了保证抖动网络下的用户体验，前端采用固定周期的状态刷新策略，从后端获取播放状态与基础统计，以轻量化的键值对形式呈现。整体而言，此链路以稳定的 REST 语义与可替换的数据源为核心，既支撑了快速演示，又为后续切换到 P2P 数据面预留了充分的接口余量。
+
+```mermaid
+sequenceDiagram
+  participant FE as Frontend(Viewer)
+  participant BE as Backend(FastAPI)
+  participant DS as Data(video_data)
+  participant VS as VideoService
+  FE->>BE: GET /api/search?q=...
+  BE->>VS: search_videos(q)
+  VS->>DS: 模拟数据检索
+  DS-->>VS: 命中集合
+  VS-->>BE: 列表(JSON)
+  BE-->>FE: 渲染结果
+  FE->>BE: GET /api/videos/{rid}/stream
+  BE->>VS: get_video_stream(rid)
+  VS-->>BE: 返回示例URL
+  BE-->>FE: 播放地址
+```
+
+4.1.2 节点管理
+
+节点管理功能围绕 `GET /api/peers`、`GET /api/peers/stats` 与 `PUT /api/peers/{pid}/toggle` 展开：接口在 `app/api/peers.py` 中注册，服务层由 `PeerService` 代理至 `app/data/peer_data.py`。数据端初始化 20 个模拟节点，记录在线状态、上下行速率、累计流量、是否启用与 NAT 类型等要素，其中 NAT 类型取自 `NAT_TYPES` 列表（包含 Full Cone、Restricted Cone、Port Restricted Cone、Symmetric）。统计接口在当前实现中聚合在线节点的上下行速率，并固定示例 NAT 类型，用于前端页头的运行概要展示；启停接口则直接修改内存字典中对应节点的 `is_enabled` 字段。该设计的初衷在于以“轻量模拟—接口固化”的方式稳定前端交互语义，使后续将数据源切换为 Repeater + P2P 内核时，前端无需改动即可接入真实运行态指标。
+
+```mermaid
+graph TD;
+  A[PeerService.list_peers] --> B[peer_data.get_peers_list];
+  C[PeerService.get_stats] --> D[peer_data.get_peer_stats];
+  E[PeerService.toggle] --> F[peer_data.toggle_peer];
+  B --> G[前端列表渲染];
+  D --> H[页头统计/NAT类型];
+  F --> I[启停状态变更];
+```
+
+4.1.3 历史记录
+
+历史记录模块由 `GET/POST/DELETE /api/history` 构成，接口位于 `app/api/history.py`，服务层调用 `HistoryService`，最终落入 `app/data/history_data.py` 的内存存储。新增记录时，后端以 `get_current_time()` 生成 `play_time/created_at/updated_at`，并以 `generate_id()` 生成唯一标识；列表查询对记录按播放时间逆序返回，以满足“最近一次观看优先”的使用习惯。当前实现不引入持久化数据库，旨在降低演示复杂度，同时通过统一的数据访问层为后续的持久化演进（如落地 file store 或外部 DB）保留清晰的替换点。
+
+```mermaid
+graph TD;
+  POSTH[POST api history];
+  SVCC[HistoryService.create];
+  ADDH[add_history record];
+  GETH[GET api history];
+  LSTH[list_history sort];
+  DELH[DELETE api history id];
+  RMH[delete_history id];
+  POSTH --> SVCC;
+  SVCC --> ADDH;
+  GETH --> LSTH;
+  DELH --> RMH;
+```
+
+4.1.4 设置功能
+
+设置模块通过 `GET/PUT /api/settings` 提供获取与更新功能。后端 `SettingsService.update()` 以“部分字段合并”的方式应用配置变更，前端设置页据此形成“显式参数—即时生效”的交互契约。当前数据仍存放于内存结构，设计上建议将关键参数（如是否启用 P2P、本地缓存上限、上传限速、线程数等）映射为 Repeater 的字段化接口，以实现从 UI 到内核的端到端配置链路。
+
+4.2 进程间数据中转传输
+
+4.2.1 进程间通信（IPC）概述
+
+为了在 Python Web 后端与 C++ 内核之间建立稳定且低开销的桥接，系统采用 Unix Domain Socket（默认 `/tmp/p2p_repeater.sock`）承载 IPC。消息采用固定 37 字节头部：`func_type(1B)`、`field(32B)` 与 `len(4B, BE)`，消息体为原始字节流。`func_type=1` 表示 Getter，`func_type=2` 表示 Setter，字段名以 UTF-8 编码，超出 32 字节将被拒绝。该“窄接口—宽语义”的设计大幅降低了跨语言绑定与并发读写的复杂度，便于字段的增量演进与兼容管理。
+
+4.2.2 自定义通信协议与字段组织
+
+C++ 侧在 `repeater/cpp/include/repeater/server.hpp` 中定义 `FieldRegistry`，将字段名映射至读写回调；Python 侧使用 `repeater/python/repeater/client.py` 的 `get(field)` 与 `set(field, value)` 发起调用。服务端在 `server.cpp` 中以 `accept_loop()` 接收连接，`handle_client()` 解析头部并分发至注册回调，随后按相同头部结构回写响应。字段建议以命名域方式组织（如 `peer.*、net.*、cfg.*、video.*`），由后端进行聚合与暴露。如下图展示了一个典型的 Getter 调用链路。
+
+```mermaid
+sequenceDiagram
+  participant PY as Python(Backend)
+  participant CL as RepeaterClient
+  participant SV as IpcServer
+  participant RG as FieldRegistry
+  participant CC as C++ Core
+  PY->>CL: get("peer.count")
+  CL->>SV: UDS 发送(37B头)
+  SV->>RG: 查找 getter 回调
+  RG->>CC: 读取运行指标
+  CC-->>SV: 字节流
+  SV-->>CL: 回写(头+数据)
+  CL-->>PY: 返回值
+```
+
+4.2.3 服务端（C++）
+
+服务端以 `IpcServer` 封装监听、接入与请求处理。在 `handle_client()` 中依序完成：读取头部、按长度读取数据、裁剪字段名的 `\0` 终止、查找对应 getter/setter 回调并执行、再以同构头部回写响应。代码显式区分了读取完整头部与数据体的错误处理，从而在半双工场景下保证协议同步性。由于消息体保持原样传输，字段值的编码策略交由调用方定义，既适配数值型也兼容结构化序列化方案。
+
+4.2.4 客户端（Python）
+
+客户端以 `RepeaterClient` 封装 `_send(func_type, field, data)`，构造 37 字节头并发送，再读取响应头与数据体。`set()` 支持 `bool/int/float/bytes/str` 的自动编码，其中整数采用 64 位大端，浮点使用 IEEE754 双精度。该设计以最小代码量提供了一致的调用体验，并以异常抛出方式显式处理连接中断与半包问题，便于在后端服务层做统一重试与降级。
+
+4.3 点对点通信模块
+
+4.3.1 节点网络的建立（设计）
+
+`service/p2p/readme.md` 定义了模块职责与接口边界，包括抽象 `peer` 对象、维护路由表（在线/离线）、引入低优先级的 `superpeer` 进行发现辅助，以及直连与被动接入两种建链路径。建链成功后，节点间通过 `tcp-like` 的可靠会话进行“命令/数据”传输，并支持“协助连接”的周边流程。当前仓库提供了 `tcp-like` 与 `nat-traversal` 的可用原型以及 `store` 的资源管理模块，`p2p` 内核按上述约束进行接口设计与集成；在论文实现部分，我们据此给出架构设计与流程，而不宣称未提交代码的具体实现细节。
+
+```mermaid
+graph TD;
+  DISC[发现 候选收集];
+  NAT[打洞 可达性测试];
+  REL[tcp_like 可靠会话建立];
+  REG[加入路由表 在线];
+  SYNC[命令 数据通道并行];
+  DISC --> NAT;
+  NAT --> REL;
+  REL --> REG;
+  REG --> SYNC;
+```
+
+4.3.2 节点间传输协议（设计）
+
+按照 `p2p/readme.md`，系统将“数据”与“命令”区分对待，并允许以统一的应用层协议进行封装。命令面承担协助连接、路由更新、片段请求等轻量控制语义；数据面承载切片级载荷并对重试与校验敏感。两者均复用 `tcp_like::ReliableSession` 的顺序与可靠保证，从而在不引入额外 TCP 套接字的前提下实现统一的报文编排与状态机管理。
+
+4.3.3 资源查找（设计）
+
+`p2p/readme.md` 指定优先采用 Kademlia（DHT）进行键到节点的映射，在缺乏覆盖网络或节点规模较小时退化为受限泛洪检索。鉴于当前仓库未包含 DHT 实现，本文在实现章节仅给出接口级设计与与路由表的衔接方式，不对算法细节进行占位性陈述。
+
+4.4 资源文件管理模块
+
+4.4.1 资源的保存
+
+资源以字符串 `sid` 标识，由 `store::FileStore` 承载。创建路径 `create(sid)` 在文件系统中新建空文件并写入元信息；追加路径 `append(sid, data)` 在容量校验与必要淘汰之后对文件顺序写入，并原子化更新 `lastModifiedEpochMs` 与 `sizeBytes`，同时累加 `usedSizeBytes_` 并持久化到根目录下的元文件。该实现优化了顺序写吞吐并控制了崩溃恢复后的状态一致性。
+
+4.4.2 资源的读取
+
+读取接口 `read(sid, begin, end)` 打开只读文件，进行范围读取；当入参非法或系统调用失败时返回空向量。该语义与上层的分片拉流相契合，使播放页可按需提取区间数据以构建缓存窗口。
+
+4.4.3 缓存淘汰机制
+
+存储上限通过 `set_storage_limit()` 配置；当写入导致 `used > limit` 时，`evict_until(bytesNeeded)` 以“最近修改时间”作为近似 LRU 的替代指标，逐个删除最久未修改的文件直至满足空间需求。此外，后台线程以固定间隔关闭 5 秒以上未操作的打开句柄，降低 fd 占用与泄漏风险。下图展示了写入与空间管理流程（按 Mermaid 9.3.0 语法书写）。
+
+```mermaid
+graph TD;
+  WREQ([写入请求 data-sid]);
+  CHK{容量检查};
+  APP[[顺序追加写入]];
+  EVICT[[基于最近修改时间淘汰]];
+  META([更新元信息 时间戳 大小]);
+  USED([刷新已用空间]);
+  IDLE([后台线程回收空闲fd]);
+  WREQ --> CHK;
+  CHK --> APP;
+  CHK --> EVICT;
+  EVICT --> CHK;
+  APP --> META;
+  META --> USED;
+  USED --> IDLE;
+```
+
+4.5 NAT 穿透模块
+
+4.5.1 NAT 类别判定
+
+`nat_traversal/nat_types.hpp` 定义了 `NatType` 枚举与 `toString()`，覆盖 OpenInternet、FullCone、RestrictedCone、PortRestrictedCone、Symmetric 与 Unknown。`NatDetector` 在头文件中暴露 `detect(local, stunServer)` 占位接口与 `natType()` 访问器，为集成 STUN/自研探测逻辑预留了入口。设计上，判定结果不仅用于 UI 展示，也将作为连通性协商与路径排序的输入。
+
+4.5.2 穿透会话管理
+
+`NatAgent` 封装候选收集、通路协商与保活维护：`gatherCandidates()` 返回本端候选；`negotiate(remoteCandidates)` 在占位实现中选择对端首个候选；`connectReliable(path, session)` 以 `tcp_like::ReliableSession` 建链并复用其心跳保持 NAT 映射存活。该抽象与可靠会话解耦，使后续引入更复杂的打洞策略与中继回退成为可能。下图给出协商与建链的时序示意。
+
+```mermaid
+sequenceDiagram
+  participant A as NatAgent(A)
+  participant B as NatAgent(B)
+  A->>A: gatherCandidates()
+  B->>B: gatherCandidates()
+  A->>B: 交换候选
+  B->>A: 交换候选
+  A->>A: negotiate(remote)
+  A->>RS: connectReliable(path)
+  RS-->>A: Established
+```
+
+4.6 基于 UDP 的可靠通信
+
+4.6.1 三次握手与状态机
+
+`tcp_like::ReliableSession` 暴露 `connect/listen/acceptFrom/stop`，并以 `State` 表示 Closed、SynSent、SynReceived、Established、FinWait 与 TimeWait。握手阶段通过 `SYN/SYN-ACK/ACK` 完成双向确认，实际驱动与重传由 `update()` 周期性执行。
+
+4.6.2 数据包重排与按序交付
+
+头部包含 `sequence/ack/ackBits`，其中 `ackBits` 记录最近 32 个包的选择性确认位图；接收侧维护 `reorderBuffer_` 与 `expectedSequence_`，在乱序到达时暂存，满足按序条件后批量交付至 `recvQueue_`。
+
+4.6.3 心跳保活与空闲超时
+
+会话提供心跳开关与间隔配置（默认启用，1000ms），并维护空闲超时（默认 10000ms）。心跳在 `update()` 中按需发送与校验，空闲期将进入 `TimeWait` 并关闭。
+
+4.6.4 超时控制与统计
+
+当前演示实现以固定策略驱动重传与超时，未包含 RTO 自适应与拥塞控制（详见 `service/tcp-like/readme.md` 的说明）。统计模块以滑动窗口估计上下行速率，并累计发送/接收字节数，通过 `getStats()` 暴露查询接口，便于上层观测与 UI 呈现。
+
+```mermaid
+graph TD;
+  IDLE[空闲];
+  SYN[SYN 发送];
+  SYNACK[SYNACK 接收];
+  EST[已建立];
+  HB[心跳 数据收发 重传];
+  FIN[关闭 超时];
+  TW[TimeWait];
+  IDLE --> SYN;
+  SYN --> SYNACK;
+  SYNACK --> EST;
+  EST --> HB;
+  EST --> FIN;
+  FIN --> TW;
+  TW --> IDLE;
+```
