@@ -128,3 +128,17 @@ cmake --build /home/cracken/project/p2p-video-accelerator/service/build -j
 - 当前未实现：RTT/RTO 估计、拥塞控制、分片、FIN 优雅关闭。
 - 示例端口为同机演示，可在实际部署中调整并结合 NAT 模块进行打洞后再建立可靠会话。
 
+### 超时控制与统计流量（代码位置与说明）
+
+超时控制逻辑集中在 `src/reliable_session.cpp` 的 `update()` 例程与收包路径：
+
+1) 重传与丢弃：`update()` 内部遍历 `sendQueue_`，当当前时间与 `InflightPacket::lastSendAt` 相差超过常量 `kResendTimeoutMs`（300ms）时，重新发送携带 `FLAG_DATA|FLAG_ACK` 的数据包并累加 `retries`；超过 `kMaxRetries`（10）后在同函数末尾通过 `remove_if` 丢弃在途包。
+
+2) ACK-only 快速反馈：`handleIncoming()` 在成功解析包头后，除处理心跳外，若有数据则调用 `deliverInOrder()` 与统计接收字节，并无论是否有数据负载，都会立即发送一个仅含 `FLAG_ACK` 的确认，缩短确认路径、减少冗余重传。
+
+3) 心跳与空闲超时：`maybeSendHeartbeat()` 按 `heartbeatIntervalMs_`（默认 1000ms）在空闲时发送 `PING`；`update()` 根据 `lastActivityAt_` 与 `idleTimeoutMs_`（默认 10000ms）判断是否进入 `TimeWait` 并 `stop()` 释放资源。
+
+4) 速率与累计：发送路径在 `send()` 中累加 `stats_.bytesSentTotal` 与窗口计数 `bytesSentWindow_`；接收路径在 `handleIncoming()` 中累加 `stats_.bytesRecvTotal/bytesRecvWindow_`。`updateRates()` 以 0.5s 滑动窗口计算 `sendRateBps/recvRateBps` 并清空窗口计数，暴露给 `getStats()`。
+
+关键成员与常量：`kResendTimeoutMs/kMaxRetries`、`lastActivityAt_/idleTimeoutMs_`、`heartbeatEnabled_/heartbeatIntervalMs_`、`bytesSentWindow_/bytesRecvWindow_/rateWindowStart_`，均定义于 `src/reliable_session.cpp` 与 `include/tcp_like/reliable_session.hpp`。
+

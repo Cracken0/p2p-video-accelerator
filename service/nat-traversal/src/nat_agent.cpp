@@ -16,7 +16,11 @@ void NatAgent::stop() {
 }
 
 std::vector<Candidate> NatAgent::gatherCandidates() {
-    // TODO: 通过 STUN 收集 server-reflexive 候选；当前返回一个占位候选
+    // 基于 NatDetector 的轻量占位探测，返回一个本端候选（若映射存在则返回映射）
+    NatDetector det;
+    det.detect(local_, cfg_.stunServer);
+    auto mapped = det.mappedCandidate();
+    if (mapped) return { *mapped };
     return { Candidate{"127.0.0.1", local_.port} };
 }
 
@@ -40,7 +44,7 @@ bool NatAgent::connectReliable(const Connectivity& path, tcp_like::ReliableSessi
     if (path.type == Connectivity::Type::Direct) {
         return session.connect(path.localEp, path.remoteEp);
     }
-    // TODO: relay fallback (TURN or custom repeater)
+    // relay fallback 由上层决定，当前未实现
     return false;
 }
 
