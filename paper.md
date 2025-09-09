@@ -573,3 +573,20 @@ graph TD
 本文的顺利完成，首先谨向我的导师表示诚挚感谢。导师在选题凝练、技术路线规划与论文写作规范方面给予了耐心指导，使我得以在工程实现与理论把握之间取得较为稳妥的平衡。同时，感谢学校提供的良好学习与实践环境，完善的课程体系与实验资源为本课题奠定了坚实基础；亦感谢任课教师在计算机网络、操作系统、软件工程等课程中的启发，使我能够以系统化视角开展设计与验证。家人和同学在时间安排与心理支持上的理解与鼓励，是我坚持完成本工作的持续动力。
 
 此外，本设计受益于开源生态与学术社区的长期积累：Linux 网络编程与 epoll 机制、CMake 构建体系、FastAPI/Starlette 与 Uvicorn 的高效后端框架、Vue 3 的组件化范式、OpenSSL Crypto 在哈希等基础能力上的支持，以及关于 Kademlia、可靠 UDP 与拥塞控制等公开资料，为实现与对比提供了可靠工具与可复现参考。由于个人能力与时间所限，文中实现仍有进一步改进空间，后续拟围绕拥塞控制与 RTO 自适应、NAT 探测与多路径传输、缓存淘汰的多目标优化等方向持续完善。
+
+
+[1] Xie, H., Yang, Y. R., Krishnamurthy, A., Liu, Y., & Silberschatz, A. (2007). P4P: provider portal for applications. ACM SIGCOMM Computer Communication Review, 38(4), 351-362.
+[2] Magharei, N., & Rejaie, R. (2009). PRIME: Peer-to-peer receiver-driven mesh-based streaming. IEEE/ACM Transactions on Networking, 17(4), 1052-1065.
+[1] 谭光明, 李慧中. 基于P2P的流媒体传输优化研究. 计算机研究与发展, 2012, 49(6): 1181-1190.
+[2] Magharei, N., & Rejaie, R. (2009). PRIME: Peer-to-peer receiver-driven mesh-based streaming. IEEE/ACM Transactions on Networking, 17(4), 1052-1065.
+[1] 王健, 张晓东. 基于P2P的流媒体系统关键技术研究. 软件学报, 2010, 21(7): 1675-1687.
+[2] Xie, H., Yang, Y. R., Krishnamurthy, A., Liu, Y., & Silberschatz, A. (2007). P4P: provider portal for applications. ACM SIGCOMM Computer Communication Review, 38(4), 351-362.
+[1] 王志强, 李建中. NAT穿越技术研究综述. 计算机工程, 2011, 37(20): 1-5.
+[2] Rosenberg, J., Mahy, R., & Huitema, C. (2008). STUN - Simple Traversal of User Datagram Protocol (UDP) Through Network Address Translators (NATs). IETF RFC 5389.
+[3] 陈勇, 高飞. P2P网络中NAT穿越机制与优化. 计算机科学, 2014, 41(6): 92-98.
+[4] Guha, S., & Francis, P. (2007). Characterization and Measurement of TCP Traversal through NATs and Firewalls. ACM IMC, 199-211.
+[1] Cisco. Cisco Annual Internet Report (2018–2023). Cisco Systems, 2020.
+[2] 王晓明, 李勇. CDN 技术研究与发展综述. 计算机科学, 2012, 39(6): 12-18.
+[1] Cisco. Cisco Annual Internet Report (2018–2023). Cisco Systems, 2020.
+[2] Cisco. Cisco Visual Networking Index: Forecast and Trends, 2017–2022. Cisco Systems, 2019.
+[3] 中兴通讯. 5G+8K 超高清视频白皮书. 中兴通讯技术白皮书, 2019.
