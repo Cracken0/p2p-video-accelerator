@@ -1,4 +1,25 @@
-3. 系统设计
+
+
+```
+点对点网络；分布式哈希；地址转换技术；流媒体；内网穿透
+
+跨语言异构系统的轻量级桥接：创新性地设计了基于 Unix Domain Socket 的字段化 IPC 协议，通过 37 字节定长头部实现 Python Web 后端与 C++ P2P 内核的无缝协作。这种"窄接口—宽语义"的设计大幅降低了跨语言绑定的复杂度，通过字段命名域实现了观测与控制语义的统一抽象。
+基于 UDP 的高效内网穿透：系统在传统 TCP 基础上，创新性地采用基于 UDP 的可靠传输协议，结合 NAT 穿透技术实现"直连优先、中继回退"的智能路径选择。通过三次握手、选择性确认、乱序重排等机制，在保障传输可靠性的同时显著降低了内网穿透的时延与资源开销，为视频分发提供了高效的混合内容分发路径。
+
+随着视频业务的快速增长，中心化架构在高并发下易受带宽瓶颈限制，造成播放延迟与卡顿。本文提出并实现一种基于P2P的浏览器加速器，通过节点间资源共享缓解服务器压力，使用户在负载高峰仍可获得稳定且高速的视频传输体验。
+本文设计的系统架构由网络模块、资源管理模块、Peer模块、接口映射模块和用户界面模块五部分构成。值得注意的是，网络模块在UDP基础上实现了可靠传输与NAT穿透，并具备带宽限速及上下行统计功能；资源管理模块通过动态更新的本地缓存控制磁盘使用；Peer模块借助分布式哈希表完成资源定位与路由寻址，从而支持多节点间的数据请求与共享；接口映射模块结合C++与Python实现标准化HTTP服务；而用户界面模块则以浏览器插件形式支持交互，包括资源请求、缓存及上传速率调节，以及实时传输速度与Peer数量的可视化。
+实验结果表明，该系统能够在保证用户正常观看体验的同时，减轻中心化服务器的压力。验证了基于P2P的浏览器视频加速器的可行性，为构建去中心化的视频分发系统提供了参考。
+
+With the rapid growth of video services, the centralized architecture is prone to bandwidth bottlenecks under high concurrency, resulting in playback delays and buffering. This paper proposes and implements a P2P-based browser accelerator that alleviates server pressure through resource sharing among nodes, enabling users to enjoy stable and high-speed video transmission even during peak loads.
+The system architecture designed in this paper consists of five parts: the network module, the resource management module, the Peer module, the interface mapping module, and the user interface module. Notably, the network module achieves reliable transmission and NAT traversal based on UDP, and has the functions of bandwidth limiting and uplink/downlink statistics. The resource management module controls disk usage through a dynamically updated local cache. The Peer module uses a distributed hash table to complete resource location and routing addressing, thereby supporting data requests and sharing among multiple nodes. The interface mapping module combines C++ and Python to implement standardized HTTP services. The user interface module supports interaction in the form of a browser plugin, including resource requests, cache and upload rate adjustment, as well as the visualization of real-time transmission speed and the number of Peers.
+The experimental results show that the system can ensure the normal viewing experience of users while reducing the pressure on the centralized server. It verifies the feasibility of the P2P-based browser video accelerator and provides a reference for building a decentralized video distribution system.
+```
+
+
+
+---
+
+3，系统设计
 
 本系统旨在构建一套面向视频分发场景的端到端 P2P 加速体系，提供从前端播放、后端编排到本地节点传输及资源管理的完整闭环。系统总体采用“浏览器前端 + Python Web 后端 + C++ P2P 服务 + 进程间中转器”的分层解耦架构，通过 Unix Domain Socket 的轻量 IPC 统一内外部数据面，结合 NAT 穿透与基于 UDP 的可靠传输子系统，形成低时延、可扩展的混合内容分发路径。
 
@@ -590,3 +611,126 @@ graph TD
 [1] Cisco. Cisco Annual Internet Report (2018–2023). Cisco Systems, 2020.
 [2] Cisco. Cisco Visual Networking Index: Forecast and Trends, 2017–2022. Cisco Systems, 2019.
 [3] 中兴通讯. 5G+8K 超高清视频白皮书. 中兴通讯技术白皮书, 2019.
+
+
+
+
+
+---
+
+生成一份用于毕业设计答辩的PPT，重在提供PPT整体模板。相关内容如下：
+
+要求风格简洁但不简陋。页面排版规整，合适的地方预留放图片的位置。
+
+语句简练，重在图示。着重表达出整个ppt的结构框架。
+
+# 封面页
+
+基于P2P的浏览器视频播放加速器设计与实现
+
+# 目录页
+
+包含以下的几个大标题
+
+# 背景
+
+伴随着互联网技术的快速发展和普及，视频点播服务已成为人们日常娱乐和信息获取的重要方式。然而，传统的基于服务器集群的视频点播系统在高并发访问环境下面临着严峻挑战。这类系统通常采用C/S（客户端/服务器）架构或B/S（浏览器/服务器）架构，所有视频数据都需要从中央服务器分发，导致服务器负载巨大，带宽成本高昂。特别是在热门内容访问期间，单一服务器容易遭受高并发访问带来的压力，出现性能瓶颈和响应缓慢的问题，严重影响用户体验。
+
+P2P（Peer-to-Peer）技术的出现为解决这一问题提供了新思路。P2P技术通过分布式网络协作，将服务器负载分散在各个节点上，充分利用边缘网络资源，提高了系统的可扩展性和可靠性。在P2P网络中，每个用户节点不仅可以获取数据，还可以成为数据的提供者，实现了资源的共享与协同工作。这种去中心化的特点与视频点播的业务需求非常吻合，能够有效减轻服务器压力，提高资源利用率。
+
+因此，设计且实现一个集用户体验好、性能优、操作简单于一体的P2P网络视频加速应用，成为广大网络视频用户的必备工具，对降低中心化服务的成本和解决中心化服务在高负载下的卡顿意义非凡。
+
+ 
+
+表1.1 传统视频分发系统与P2P-CDN混合系统的比较
+
+| 特性       | 传统视频分发系统        | P2P-CDN混合系统                |
+| ---------- | ----------------------- | ------------------------------ |
+| 架构模式   | 集中式（客户端-服务器） | 分布式（点对点）               |
+| 扩展性     | 有限，受服务器容量限制  | 高度可扩展，节点越多，性能越好 |
+| 带宽成本   | 较高，全部由提供商承担  | 较低，分散到各个节点           |
+| 抗拥堵能力 | 较差，高峰期容易拥堵    | 较强，节点间直接交换数据       |
+| 部署难度   | 相对简单，易于管理      | 复杂，需要节点管理机制         |
+
+
+
+# 相关技术简介
+
+FastAPI
+
+vue
+
+NAT
+
+NAT穿透
+
+分布式哈希
+
+
+
+# 系统设计
+
+基于UDP的P2P视频加速
+
+用户服务设计
+
+进程间数据中转传输
+
+点对点通信模块
+
+资源文件管理模块
+
+ NAT穿透模块
+
+基于UDP的可靠通信
+
+# 系统实现
+
+（适当省略忽略一些内容）
+
+ 用户界面与服务：
+
+> 搜索与查看
+>
+> 节点管理
+>
+> 历史记录
+>
+> 设置功能
+
+4.2 进程间数据中转传输	26
+4.2.1 进程间通信	26
+4.2.2 自定义通信协议与字段组织	26
+4.2.3 服务端（C++）	27
+4.2.4 客户端（Python）	28
+4.3 点对点通信模块	30
+4.3.1 节点网络建立	30
+4.3.2 节点间数据传输	34
+4.3.3 资源查找	35
+4.4资源文件管理模块	37
+4.4.1 资源的保存	37
+4.4.2 资源的读取	37
+4.4.3 缓存淘汰机制	38
+4.5 NAT穿透模块	39
+4.5.1 NAT类别判定	39
+4.5.2 NAT穿透会话管理	41
+4.6基于UDP的可靠通信	42
+4.6.1 三次握手与状态机	42
+4.6.2 数据包重排与按序交付	44
+4.6.3 心跳保活与空闲超时	46
+4.6.4 速率与流量统计	47
+
+# 系统测试
+
+5.1 测试目的	49
+5.2 测试案例	49
+5.2.1 资源搜索与查看	49
+5.2.2 节点管理	51
+5.2.3 历史记录	52
+5.2.4 设置功能	53
+
+# 总结与展望
+
+xx
+
+结尾页
