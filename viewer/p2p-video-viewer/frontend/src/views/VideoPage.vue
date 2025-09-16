@@ -7,7 +7,7 @@
         <input type="range" min="0" :max="duration" step="0.1" v-model.number="currentTime" @input="seek" />
         <div class="bottom">
           <button class="btn" @click="togglePlay">{{ playing ? '暂停' : '播放' }}</button>
-          <StatusBar :stats="stats" />
+          <StatusBar :stats="computedStats" />
         </div>
       </div>
     </div>
@@ -16,14 +16,14 @@
 
 <script>
 import { getVideo, getStream } from '@/services/videoApi'
-import { getStats } from '@/services/peerApi'
+import { getStats, listPeers } from '@/services/peerApi'
 import StatusBar from '@/components/StatusBar.vue'
 
 export default {
   name: 'VideoPage',
   components: { StatusBar },
   data(){
-    return { video: null, stream: null, stats: {}, timer: null, playing: false, currentTime: 0, duration: 0, isPending: false, ready: false, loadError: '' }
+    return { video: null, stream: null, stats: {}, peers: [], timer: null, playing: false, currentTime: 0, duration: 0, isPending: false, ready: false, loadError: '' }
   },
   async mounted(){
     const rid = this.$route.query.rid
@@ -39,7 +39,21 @@ export default {
     el.addEventListener('timeupdate', () => { this.currentTime = el.currentTime })
     el.addEventListener('play', () => { this.playing = true })
     el.addEventListener('pause', () => { this.playing = false })
-    this.timer = setInterval(async () => { this.stats = await getStats() }, 500)
+    this.timer = setInterval(async () => { 
+      this.stats = await getStats()
+      this.peers = await listPeers()
+    }, 1000)
+  },
+  computed: {
+    computedStats() {
+      // 计算在线且启用的节点数
+      const onlineEnabledPeers = this.peers.filter(peer => peer.is_online && peer.is_enabled).length
+      
+      return {
+        ...this.stats,
+        total_peers: onlineEnabledPeers
+      }
+    }
   },
   unmounted(){ if (this.timer) clearInterval(this.timer) },
   methods: {

@@ -35,6 +35,10 @@ def get_peers_list():
     peers = db["peers"].values()
     for peer in peers:
         i = peer["id"]
+        if peer["is_enabled"] == False:
+            peer["download_speed"] = 0.00
+            peer["upload_speed"] = 0.00
+            continue
         peer["download_speed"] = round(2.0 + (random.random()*5) * 0.3, 2)
         peer["upload_speed"] = round(20.0 + (random.random()*10) * 1.1, 2)
         peer["total_download"] = round(0.5 * peer["download_speed"] + peer["total_download"], 2)
