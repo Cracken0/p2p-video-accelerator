@@ -4,6 +4,7 @@ Peer节点模拟数据
 
 from datetime import timedelta
 from .store import db, get_current_time
+import random
 
 NAT_TYPES = [
     "Full Cone", "Restricted Cone", "Port Restricted Cone", "Symmetric"
@@ -12,9 +13,10 @@ NAT_TYPES = [
 def init_peer_data():
     peers = {}
     base_time = get_current_time() - timedelta(minutes=5)
-    for i in range(1, 21):
+    for i in range(1, 3):
         pid = f"peer_{i:03d}"
         peers[pid] = {
+            "id": i,
             "pid": pid,
             "is_online": True if i % 7 != 0 else False,
             "download_speed": round(2.0 + (i % 5) * 0.3, 2),
@@ -30,7 +32,16 @@ def init_peer_data():
 
 
 def get_peers_list():
-    return list(db["peers"].values())
+    peers = db["peers"].values()
+    for peer in peers:
+        i = peer["id"]
+        peer["download_speed"] = round(2.0 + (random.random()*5) * 0.3, 2)
+        peer["upload_speed"] = round(20.0 + (random.random()*10) * 1.1, 2)
+        peer["total_download"] = round(0.5 * peer["download_speed"] + peer["total_download"], 2)
+        peer["total_upload"] = round(0.5 * peer["upload_speed"] + peer["total_upload"], 2)
+        pass
+    
+    return list(peers)
 
 
 def get_peer(pid: str):

@@ -14,7 +14,7 @@ def init_video_data():
             "description": "深入讲解P2P网络技术的原理和应用",
             "thumbnail_url": "https://via.placeholder.com/300x200/4A90E2/FFFFFF?text=P2P技术详解",
             "duration": 1800,
-            "file_size": 150 * 1024 * 1024,
+            "file_size": int(104.27 * 1024 * 1024),
             "created_at": get_current_time() - timedelta(days=5),
             "updated_at": get_current_time() - timedelta(days=1)
         },
@@ -24,7 +24,7 @@ def init_video_data():
             "description": "从零开始开发一个视频加速器应用",
             "thumbnail_url": "https://via.placeholder.com/300x200/50C878/FFFFFF?text=视频加速器开发",
             "duration": 2400,
-            "file_size": 200 * 1024 * 1024,
+            "file_size": int(216.26 * 1024 * 1024),
             "created_at": get_current_time() - timedelta(days=3),
             "updated_at": get_current_time() - timedelta(hours=6)
         },
@@ -34,7 +34,7 @@ def init_video_data():
             "description": "提升网络传输效率的实用技巧",
             "thumbnail_url": "https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=网络优化技巧",
             "duration": 1200,
-            "file_size": 100 * 1024 * 1024,
+            "file_size": int(70.52 * 1024 * 1024),
             "created_at": get_current_time() - timedelta(days=2),
             "updated_at": get_current_time() - timedelta(hours=12)
         },
@@ -44,7 +44,7 @@ def init_video_data():
             "description": "设计高可用的分布式系统架构",
             "thumbnail_url": "https://via.placeholder.com/300x200/9B59B6/FFFFFF?text=分布式系统设计",
             "duration": 3600,
-            "file_size": 300 * 1024 * 1024,
+            "file_size": int(319.45 * 1024 * 1024),
             "created_at": get_current_time() - timedelta(days=7),
             "updated_at": get_current_time() - timedelta(days=2)
         },
@@ -54,7 +54,7 @@ def init_video_data():
             "description": "现代Web开发的技术栈和最佳实践",
             "thumbnail_url": "https://via.placeholder.com/300x200/F39C12/FFFFFF?text=Web开发最佳实践",
             "duration": 1500,
-            "file_size": 120 * 1024 * 1024,
+            "file_size": int(127.84 * 1024 * 1024),
             "created_at": get_current_time() - timedelta(days=1),
             "updated_at": get_current_time() - timedelta(hours=2)
         }
