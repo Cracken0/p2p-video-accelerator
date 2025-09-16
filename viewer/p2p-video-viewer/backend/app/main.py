@@ -42,6 +42,11 @@ app.include_router(peers.router, prefix=settings.api_prefix)
 app.include_router(history.router, prefix=settings.api_prefix)
 app.include_router(settings_api.router, prefix=settings.api_prefix)
 
+# 添加静态文件服务 - 提供视频文件访问
+videos_dir = os.path.join(_ROOT, 'videos')
+if os.path.exists(videos_dir):
+    app.mount("/videos", StaticFiles(directory=videos_dir), name="videos")
+
 @app.get("/")
 async def root():
     """根路径"""

@@ -18,11 +18,22 @@ class VideoService:
         video = get_video_by_rid(rid)
         if not video:
             return None
-        sample_url = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-        sample_url = "/home/cracken/project/p2p-video-accelerator/videos/p2p+1.mp4"
+        
+        # 从视频对象中获取本地文件路径
+        local_path = video.get("local_path")
+        if not local_path:
+            return None
+            
+        # 提取文件名
+        import os
+        filename = os.path.basename(local_path)
+        # 返回完整的HTTP URL，避免前端路径拼接问题
+        http_url = f"http://localhost:8000/videos/{filename}"
+        # http_url = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+        
         return VideoStreamInfo(
             rid=rid,
-            url=sample_url,
+            url=http_url,
             format="mp4",
             quality="720p",
             bitrate=2500,
