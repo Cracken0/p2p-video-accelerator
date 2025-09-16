@@ -18,8 +18,8 @@ class VideoService:
         video = get_video_by_rid(rid)
         if not video:
             return None
-        # 使用可播放的公共示例视频，方便前端验证
         sample_url = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+        sample_url = "/home/cracken/project/p2p-video-accelerator/videos/p2p+1.mp4"
         return VideoStreamInfo(
             rid=rid,
             url=sample_url,

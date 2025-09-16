@@ -30,7 +30,7 @@ export default {
     this.video = await getVideo(rid)
     this.stream = await getStream(rid)
     const el = this.$refs.player
-    el.src = this.stream.url
+    el.src = this.getVideoUrl(this.stream.url)
     // 触发加载，监听可播放与错误
     el.load()
     el.addEventListener('canplay', () => { this.ready = true })
@@ -43,6 +43,30 @@ export default {
   },
   unmounted(){ if (this.timer) clearInterval(this.timer) },
   methods: {
+    getVideoUrl(url) {
+      // 自动识别URL类型并返回合适的格式
+      if (!url || typeof url !== 'string') {
+        return url
+      }
+      
+      // 检查是否为HTTP/HTTPS URL
+      if (url.startsWith('http://') || url.startsWith('https://')) {
+        return url
+      }
+      
+      // 检查是否为file:// URL
+      if (url.startsWith('file://')) {
+        return url
+      }
+      
+      // 检查是否为本地文件路径（以 / 开头）
+      if (url.startsWith('/')) {
+        return `file://${url}`
+      }
+      
+      // 其他情况（如相对路径），直接返回
+      return url
+    },
     async togglePlay(){
       const el = this.$refs.player
       if (this.isPending) return
