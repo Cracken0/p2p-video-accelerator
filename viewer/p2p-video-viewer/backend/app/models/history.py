@@ -23,6 +23,7 @@ class HistoryCreateRequest(BaseModel):
     playback_progress: float
     cache_exists: bool
     avg_download_speed: float
+    play_time: Optional[datetime] = None
 
 
 
