@@ -1,3 +1,11 @@
 # Ignore Node modules everywhere
 node_modules/
 **/node_modules/**
+
+# Ignore Python cache files
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
