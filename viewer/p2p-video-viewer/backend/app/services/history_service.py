@@ -31,7 +31,7 @@ class HistoryService:
             "play_time": now,
             "file_size": file_size,
             "playback_progress": playback_progress,
-            "cache_exists": cache_exists,
+            "cache_exists": False, #cache_exists,
             "avg_download_speed": avg_download_speed,
             "created_at": now,
             "updated_at": now,
@@ -41,6 +41,7 @@ class HistoryService:
         
         # 更新需要下载的量（新建历史记录时总是更新）
         # 新建历史记录时，old_cache_exists为None，表示这是新记录
+        print(f"DEBUG: HistoryService.create调用update_need_download_on_cache_change - rid: {rid}, cache_exists: {cache_exists}")
         update_need_download_on_cache_change(rid, cache_exists, None)
         
         # 检查缓存限制

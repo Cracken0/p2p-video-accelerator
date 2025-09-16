@@ -74,6 +74,13 @@ def update_need_download_on_cache_change(rid: str, new_cache_exists: bool, old_c
         print(f"新建历史记录（状态为False），添加需要下载: {video_size_mb:.2f}MB, 总需下载: {need_download:.2f}MB")
         return
     
+    # 如果old_cache_exists是False且new_cache_exists是True，说明这是新建记录且缓存存在
+    if old_cache_exists is False and new_cache_exists is True:
+        # 新建历史记录时，无论缓存状态如何，都更新need_download为目标视频大小
+        need_download = round(need_download + video_size_mb, 2)
+        print(f"新建历史记录（从False到True），添加需要下载: {video_size_mb:.2f}MB, 总需下载: {need_download:.2f}MB")
+        return
+    
     # 检查缓存状态变化
     if not old_cache_exists and new_cache_exists:
         # 缓存状态从否变为是，更新need_download为目标视频大小

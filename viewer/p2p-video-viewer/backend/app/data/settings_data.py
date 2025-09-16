@@ -8,7 +8,7 @@ from .store import db
 def init_settings_data():
     db["settings"] = {
         "p2p_service_enabled": True,
-        "local_cache_limit": 2048.0,
+        "local_cache_limit": 200.0,
         "upload_speed_limit": 512.0,
         "thread_count": 4
     }

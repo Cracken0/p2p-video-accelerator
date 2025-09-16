@@ -57,9 +57,15 @@ export default {
       // 计算在线且启用的节点数
       const onlineEnabledPeers = this.peers.filter(peer => peer.is_online && peer.is_enabled).length
       
+      // 获取节点一的数据（第一个节点）
+      const peer1 = this.peers.length > 0 ? this.peers[0] : null
+      
       return {
         ...this.stats,
-        total_peers: onlineEnabledPeers
+        total_peers: onlineEnabledPeers,
+        // 只显示节点一的下行和上行速率
+        total_download_speed: peer1 ? peer1.download_speed : 0,
+        total_upload_speed: peer1 ? peer1.upload_speed : 0
       }
     }
   },
